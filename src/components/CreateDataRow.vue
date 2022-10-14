@@ -1,15 +1,15 @@
 <template>
     <tr>
-        <td><input v-model="fieldName" /></td>
+        <td><input v-model="fieldName" class="form-control"/></td>
         <td>
-            <select v-model="fieldType">
+            <select v-model="fieldType" class="form-control">
                 <option v-for="(value, key) in dataTypes" v-bind:key="key">
                     {{ value }}
                 </option>
             </select>
         </td>
         <td colspan="2">
-            <button @click="$emit('add', addRow())">Add Field</button>
+            <button @click="$emit('add', addRow())" class="btn btn-dark">Add Field</button>
         </td>
     </tr>
 </template>

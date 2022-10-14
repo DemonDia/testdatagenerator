@@ -1,6 +1,7 @@
 <template>
     <div>
         <h4>Preview</h4>
+        <div></div>
         <code>
             <pre>{{ formatJsonFields }}</pre>
         </code>
@@ -23,3 +24,11 @@ export default {
     },
 };
 </script>
+<style scoped>
+pre {
+    text-align: left;
+    background: black;
+    padding: 20px;
+    border-radius: 5px;
+}
+</style>

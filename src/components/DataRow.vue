@@ -3,27 +3,27 @@
         <p v-if="!editing">
             {{ row.fieldName }}
         </p>
-        <input v-else v-model="newFieldName" />
+        <input v-else v-model="newFieldName" class="form-control"/>
     </td>
     <td>
         <p v-if="!editing">
             {{ row.fieldType }}
         </p>
-        <select v-else v-model="newFieldType">
+        <select v-else v-model="newFieldType" class="form-control">
             <option v-for="(value, key) in dataTypes" v-bind:key="key">
                 {{ value }}
             </option>
         </select>
     </td>
     <td v-if="!editing" colspan="2">
-        <button @click="toggleEditing">Edit</button>
-        <button @click="$emit('delete', deleteData())">Delete</button>
+        <button @click="toggleEditing" class="btn btn-primary">Edit</button>
+        <button @click="$emit('delete', deleteData())" class="btn btn-danger">Delete</button>
     </td>
     <td v-else>
-        <button @click="$emit('save', saveData(), toggleEditing())">
+        <button @click="$emit('save', saveData(), toggleEditing())" class="btn btn-primary">
             Save
         </button>
-        <button @click="toggleEditing">Cancel</button>
+        <button @click="toggleEditing" class="btn btn-secondary">Cancel</button>
     </td>
 </template>
 <script>

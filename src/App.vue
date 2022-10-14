@@ -2,8 +2,10 @@
     <div>
         <h1>Test Data Generator</h1>
         <GenerateJsonData :jsonData="fields" />
+        <hr>
         <div id="main">
             <div id="dataGenTableContainer">
+                <h4>Json table</h4>
                 <table>
                     <tr>
                         <th>Field Name</th>
@@ -94,6 +96,9 @@ export default {
 };
 </script>
 <style>
+html {
+    background: grey;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -101,6 +106,45 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    background: grey;
+}
+#previewerContainer,
+#dataGenTableContainer,
+#generatorContainer {
+    padding: 10px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+th,
+td,hr {
+    color: white;
+}
+#dataGenTableContainer {
+    width: 60%;
+}
+#previewerContainer {
+    width: 40%;
+}
+#main {
+    display: flex;
+}
+table {
+    border-radius: 5px;
+    width: 100%;
+    background: black;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+td p {
+    margin: auto;
 }
 /* table{
     width: 100%;

@@ -1,12 +1,22 @@
 <template>
-    <div>
-        <label>File Name: </label>
-        <input v-model="jsonFileName" />
-        <br />
-        <label>Number of rows: </label>
-        <input min="1" type="number" v-model="numberOfRows" />
-        <br />
-        <button @click="generateJsonFile">Generate Json</button>
+    <div id="generatorContainer">
+        <div class="mb-3">
+            <label class="form-label">File Name: </label>
+            <input v-model="jsonFileName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Number of rows: </label>
+            <input
+                min="1"
+                type="number"
+                v-model="numberOfRows"
+                class="form-control"
+            />
+            <br />
+        </div>
+        <button @click="generateJsonFile" class="btn" id = "generateBtn">
+            Generate Json
+        </button>
     </div>
 </template>
 <script>
@@ -83,3 +93,19 @@ export default {
     },
 };
 </script>
+<style scoped>
+#generatorContainer {
+    width: 70%;
+    display: inline-block;
+    padding:10px;
+    background:rgb(50, 50, 50);
+    border-radius: 5px;
+}
+#generatorContainer label {
+    float: left;
+}
+#generateBtn{
+    background: black;
+    color: white;
+}
+</style>
