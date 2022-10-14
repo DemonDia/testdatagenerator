@@ -9,13 +9,14 @@
             </select>
         </td>
         <td colspan="2">
-            <button @click="$emit('add', addRow(), reset())">Add Field</button>
+            <button @click="$emit('add', addRow())">Add Field</button>
         </td>
     </tr>
 </template>
 <script>
 export default {
     name: "CreateDataRow",
+    props: ["fields"],
     data() {
         return {
             dataTypes: ["string", "integer", "float", "boolean"],
@@ -27,19 +28,23 @@ export default {
     },
     // emit adding, editing and deleting
     methods: {
-        reset() {
-            console.log("reset");
-            (this.fieldName = ""), (this.fieldType = "string");
-        },
         addRow() {
-            console.log("fieldName", this.fieldName);
-            if (this.fieldName.length > 0) {
+            if (
+                this.fieldName.length > 0 &&
+                this.validateIfExisting(this.fieldName)
+            ) {
                 return {
                     fieldName: this.fieldName,
                     fieldType: this.fieldType,
                 };
             }
-            return null
+            return null;
+        },
+        validateIfExisting(fieldName) {
+            var duplicates = this.fields.filter(
+                (field) => field.fieldName == fieldName
+            );
+            return duplicates.length == 0;
         },
     },
 };

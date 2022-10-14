@@ -20,20 +20,20 @@
         <button @click="$emit('delete', deleteData())">Delete</button>
     </td>
     <td v-else>
-        <button @click="$emit('save', saveData(),toggleEditing())">Save</button>
+        <button @click="$emit('save', saveData(), toggleEditing())">
+            Save
+        </button>
         <button @click="toggleEditing">Cancel</button>
     </td>
 </template>
 <script>
 export default {
     name: "DataRow",
-    props: ["row"],
+    props: ["row", "fields"],
     data() {
         return {
             dataTypes: ["string", "integer", "float", "boolean"],
             editing: false,
-            // oldFieldName: this.row.fieldName,
-            // oldFieldType: this.row.fieldType,
             newFieldName: this.row.fieldName,
             newFieldType: this.row.fieldType,
             errors: [],
@@ -42,7 +42,7 @@ export default {
     methods: {
         toggleEditing() {
             if (!(this.row.fieldName == "id")) {
-                 this.errors = [];
+                this.errors = [];
                 this.editing = !this.editing;
             }
         },
@@ -54,7 +54,17 @@ export default {
             if (this.newFieldName == "id") {
                 this.errors.push("Forbidden field name");
             }
+            if (!this.validateIfExisting(this.newFieldName)) {
+                this.errors.push("Field name exists");
+            }
+            console.log("errors", this.errors);
             if (this.errors.length == 0) {
+                console.log({
+                    oldFieldName: this.row.fieldName,
+                    oldFieldType: this.row.fieldType,
+                    newFieldName: this.newFieldName,
+                    newFieldType: this.newFieldType,
+                });
                 return {
                     oldFieldName: this.row.fieldName,
                     oldFieldType: this.row.fieldType,
@@ -62,12 +72,13 @@ export default {
                     newFieldType: this.newFieldType,
                 };
             }
+            return null;
         },
         deleteData() {
             this.errors = [];
             if (this.newFieldName == "id") {
                 this.errors.push("Id cannot be deleted ");
-                return null
+                return null;
             }
             if (this.errors.length == 0) {
                 return {
@@ -75,6 +86,13 @@ export default {
                     fieldType: this.row.fieldType,
                 };
             }
+        },
+        validateIfExisting(fieldName) {
+            console.log("this.fields", this.fields);
+            var duplicates = this.fields.filter(
+                (field) => field.fieldName == fieldName
+            );
+            return duplicates.length == 0;
         },
     },
 };
