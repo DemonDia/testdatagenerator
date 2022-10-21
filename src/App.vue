@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Test Data Generator</h1>
-        <GenerateJsonData :jsonData="fields" />
+        <GenerateData :jsonData="fields" />
         <hr />
         <div id="main">
             <div id="dataGenTableContainer">
@@ -37,10 +37,10 @@
 import CreateDataRow from "./components/CreateDataRow.vue";
 import DataRow from "./components/DataRow.vue";
 import JsonPreview from "./components/JsonPreview.vue";
-import GenerateJsonData from "./components/GenerateJsonData.vue";
+import GenerateData from "./components/GenerateData.vue";
 export default {
     name: "App",
-    components: { CreateDataRow, DataRow, JsonPreview, GenerateJsonData },
+    components: { CreateDataRow, DataRow, JsonPreview, GenerateData },
     data() {
         return {
             fields: [
