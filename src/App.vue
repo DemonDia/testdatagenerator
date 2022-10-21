@@ -2,7 +2,7 @@
     <div>
         <h1>Test Data Generator</h1>
         <GenerateJsonData :jsonData="fields" />
-        <hr>
+        <hr />
         <div id="main">
             <div id="dataGenTableContainer">
                 <h4>Json table</h4>
@@ -16,14 +16,14 @@
                         @add="(i) => addDataColumns(i)"
                         :fields="fields"
                     />
-                    <tr v-for="(value, key) in fields" v-bind:key="key">
-                        <DataRow
-                            :row="value"
-                            :fields="fields"
-                            @save="(val) => saveChangedColumn(val)"
-                            @delete="(val) => saveDeleteColumns(val)"
-                        />
-                    </tr>
+                    <DataRow
+                        v-for="(value, key) in fields"
+                        v-bind:key="key"
+                        :row="value"
+                        :fields="fields"
+                        @save="(val) => saveChangedColumn(val)"
+                        @delete="(val) => saveDeleteColumns(val)"
+                    />
                 </table>
             </div>
             <div id="previewerContainer">
@@ -121,7 +121,8 @@ h5,
 h6,
 label,
 th,
-td,hr {
+td,
+hr {
     color: white;
 }
 #dataGenTableContainer {

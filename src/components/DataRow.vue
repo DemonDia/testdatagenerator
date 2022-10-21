@@ -1,9 +1,32 @@
 <template>
+    <tr v-if="success & errors.length==0">
+        <td colspan="3">
+            <div
+                class="alert alert-success d-flex align-items-center justify-content-between"
+                role="alert"
+            >
+                <div>Successfully updated</div>
+                <button class="btn btn-success" @click="closeBtn">Close</button>
+            </div>
+        </td>
+    </tr>
+    <tr v-if="!success & errors.length>0">
+        <td colspan="3">
+            <div
+                class="alert alert-danger d-flex align-items-center justify-content-between"
+                role="alert"
+            >
+                <div>{{ this.errors }}</div>
+                <button class="btn btn-alert" @click="closeBtn">Close</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
     <td>
         <p v-if="!editing">
             {{ row.fieldName }}
         </p>
-        <input v-else v-model="newFieldName" class="form-control"/>
+        <input v-else v-model="newFieldName" class="form-control" />
     </td>
     <td>
         <p v-if="!editing">
@@ -16,15 +39,28 @@
         </select>
     </td>
     <td v-if="!editing" colspan="2">
-        <button @click="toggleEditing" class="btn btn-primary">Edit</button>
-        <button @click="$emit('delete', deleteData())" class="btn btn-danger">Delete</button>
+        <button
+            v-if="this.row.fieldName != 'id'"
+            @click="toggleEditing"
+            class="btn btn-primary"
+        >
+            Edit
+        </button>
+        <button
+            v-if="this.row.fieldName != 'id'"
+            @click="$emit('delete', deleteData())"
+            class="btn btn-danger"
+        >
+            Delete
+        </button>
     </td>
     <td v-else>
-        <button @click="$emit('save', saveData(), toggleEditing())" class="btn btn-primary">
+        <button @click="$emit('save', saveData())" class="btn btn-primary">
             Save
         </button>
         <button @click="toggleEditing" class="btn btn-secondary">Cancel</button>
     </td>
+    </tr>
 </template>
 <script>
 export default {
@@ -37,9 +73,14 @@ export default {
             newFieldName: this.row.fieldName,
             newFieldType: this.row.fieldType,
             errors: [],
+            success: false,
         };
     },
     methods: {
+        closeBtn() {
+            this.errors = [];
+            this.success = false;
+        },
         toggleEditing() {
             if (!(this.row.fieldName == "id")) {
                 this.errors = [];
@@ -59,12 +100,9 @@ export default {
             }
             console.log("errors", this.errors);
             if (this.errors.length == 0) {
-                console.log({
-                    oldFieldName: this.row.fieldName,
-                    oldFieldType: this.row.fieldType,
-                    newFieldName: this.newFieldName,
-                    newFieldType: this.newFieldType,
-                });
+                this.errors = [];
+                this.success = true;
+                this.toggleEditing();
                 return {
                     oldFieldName: this.row.fieldName,
                     oldFieldType: this.row.fieldType,
@@ -72,6 +110,7 @@ export default {
                     newFieldType: this.newFieldType,
                 };
             }
+            this.success = false;
             return null;
         },
         deleteData() {
