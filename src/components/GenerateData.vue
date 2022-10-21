@@ -14,7 +14,7 @@
             />
         </div>
         <div class="mb-3">
-            <label>File type: {{ generatedFileType }}</label>
+            <label>File type:</label>
             <select v-model="generatedFileType" class="form-control">
                 <option v-for="(value, key) in fileTypes" v-bind:key="key">
                     {{ value }}
