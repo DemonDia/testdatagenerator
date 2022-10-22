@@ -6,7 +6,7 @@
                 role="alert"
             >
                 <div>Successfully updated</div>
-                <button class="btn btn-success" @click="closeBtn">Close</button>
+                <i class="fa-solid fa-xmark" @click="closeBtn"></i>
             </div>
         </td>
     </tr>
@@ -17,7 +17,7 @@
                 role="alert"
             >
                 <div>{{ this.errors }}</div>
-                <button class="btn btn-alert" @click="closeBtn">Close</button>
+                <i class="fa-solid fa-xmark" @click="closeBtn"></i>
             </div>
         </td>
     </tr>

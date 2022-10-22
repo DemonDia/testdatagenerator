@@ -21,7 +21,7 @@
                 role="alert"
             >
                 <div>Successfully added</div>
-                <button class="btn btn-success" @click="closeBtn">Close</button>
+                <i class="fa-solid fa-xmark" @click="closeBtn"></i>
             </div>
         </td>
     </tr>
@@ -32,7 +32,7 @@
                 role="alert"
             >
                 <div>Failed to add</div>
-                <button class="btn btn-alert" @click="closeBtn">Close</button>
+                <i class="fa-solid fa-xmark" @click="closeBtn"></i>
             </div>
         </td>
     </tr>
